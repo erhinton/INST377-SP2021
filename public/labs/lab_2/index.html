@@ -7,27 +7,42 @@
       href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300|Cinzel+Decorative:700"
       rel="stylesheet"
     />
-    <link href="style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100;900&display=swap"
+      rel="stylesheet"
+    />
+    <link href="style.css" rel="stylesheet" />
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+    <style>
+      h1 {
+        font-family: 'Big Shoulders Display';
+        font-weight: 800;
+      }
+      h2 {font-family: 'Big Shoulders Display';
+        font-weight: 100;}
+    </style>
   </head>
 
-  <body style="background-color: blue">
+  <body>
+    <div class="header">
+      <h1>Edward Hinton's Lab 2</h1>
+      <img src="mochi.gif" alt="a simple dove logo" />
+
+      <nav>
+        <ul>
+          <li><span>Home</span></li>
+          <li><a href="#">Get started</a></li>
+          <li><a href="#">Photos</a></li>
+          <li><a href="#">Gear</a></li>
+          <li><a href="#">Forum</a></li>
+        </ul>
+      </nav>
+    </div>
     <div class="main">
-      <div class="header">
-        <h1>Birdwatching</h1>
-        <img src="dove.png" alt="a simple dove logo" />
-      </div>
-
-      <ul>
-        <li><span>Home</span></li>
-        <li><a href="#">Get started</a></li>
-        <li><a href="#">Photos</a></li>
-        <li><a href="#">Gear</a></li>
-        <li><a href="#">Forum</a></li>
-      </ul>
-
       <div class="article">
         <h2>Welcome</h2>
 
@@ -36,10 +51,6 @@
           est. Praesent nisi ipsum, vestibulum et nibh feugiat, tincidunt
           consequat ante. Aenean sagittis finibus mi, eget rhoncus dui aliquam
           nec. Donec dapibus sapien enim, a commodo massa condimentum vitae.
-          Donec lacus odio, molestie non dignissim ac, blandit vitae velit.
-          Etiam finibus augue at sollicitudin posuere. Proin tincidunt
-          vestibulum erat, nec lacinia lacus ornare id. Curabitur ac sapien id
-          massa convallis ultrices.
         </p>
 
         <p>
@@ -73,17 +84,18 @@
             alt="Large bird, mostly white plumage with black plumage on back and rear, long straight white beak, links to larger version of the image"
         /></a>
       </div>
+    </div>
 
-      <div class="footer">
-        <p>This website example has been written by Edward Hinton, 2021</p>
+    <div class="footer">
+      <p>This website example has been written by Edward Hinton, 2021</p>
 
-        <p>
-          <a href="http://game-icons.net/lorc/originals/dove.html">Dove icon</a>
-          by Lorc.
-        </p>
-      </div>
+      <p>
+        <a href="http://game-icons.net/lorc/originals/dove.html">Dove icon</a>
+        by Lorc.
+      </p>
     </div>
   </body>
 </html>
 
-<!--Things to do before turn in: use two font weights, understand background colors, delete this comment -->
+<!--Things to do before turn in: use two font weights, understand background colors, delete this comment, 
+  fix formatting, fix header fonts -->
