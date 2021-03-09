@@ -12,7 +12,7 @@ function mapInit() {
   return map;
 }
 
-
+// Modified search and filter code from assignment 1 is here
 async function SearchFilter() {
  
   const request = await fetch('/api')
@@ -28,20 +28,21 @@ async function SearchFilter() {
   }
 
   //this code shows the display that matches the user's input
-  function displayMatches(event) {
-    const matchArray = findMatches(event.target.value, restaurants);
-    const html = matchArray
-      .map((place) => {
+  function displayMatches(inputWord) {
+    const matchArray = findMatches(inputWord, restaurants);
+    const firstFive = matchArray.slice(0, 5)
+    const html = firstFive.map((place) => {
         return `<li>
         <span class="name"><b>${place.name}</b></span><br>
         <address><b>${place.address_line_1}</b><br>
         <b>${place.city}</b><br>
         <b>${place.state}</b><br>
+        <b>${place.geocoded_column_1}</b><br>
         <b>${place.zip}</b><address>
         <br>
       </li>`;
-      })
-      .join("");
+      }).join("");
+
     suggestions.innerHTML = html;
   }
 
@@ -52,10 +53,8 @@ async function SearchFilter() {
 
 
   userForm.addEventListener("submit", (e) => {
-      console.log('SUBMISSION RECORDED');
-      console.log(searchInput.value)
-
-    displayMatches(e);
+      console.log(`SUBMISSION RECORDED: ${searchInput.value}`);
+    displayMatches(searchInput.value);
     e.preventDefault();
   });
 }
@@ -64,6 +63,8 @@ async function SearchFilter() {
 
 async function dataHandler(mapObjectFromFunction) {
   SearchFilter()
+  var marker = L.marker([38.9897, -76.9378]).addTo(mapObjectFromFunction);
+  console.log(firstFive)
   
 }
 
