@@ -8,7 +8,7 @@ function mapInit() {
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoiZWhpbnRvbiIsImEiOiJja20yZ21rcGUxNHJyMm9yM3Q4dDE1dGFjIn0.-83mPUmqtwJV5j2Z8RftvQ'
   }).addTo(map);
-  console.log('map',map)
+  console.log('map', map)
   return map;
 }
 
@@ -34,13 +34,11 @@ async function SearchFilter() {
       .map((place) => {
         return `<li>
         <span class="name"><b>${place.name}</b></span><br>
-        <span class="category"><b>${place.category}</b></span>
         <address><b>${place.address_line_1}</b><br>
         <b>${place.city}</b><br>
         <b>${place.state}</b><br>
         <b>${place.zip}</b><address>
-        <b>${place.type}</b><address>
-        <b>${place.owner}</b><address>
+        <br>
       </li>`;
       })
       .join("");
@@ -49,11 +47,16 @@ async function SearchFilter() {
 
   const searchInput = document.querySelector(".SearchBar");
   const suggestions = document.querySelector(".ListOfLocations");
+  const userForm = document.querySelector(".userForm");
 
 
-  document.querySelector("button").addEventListener("click", (e) => {
-      console.log('LOADING...');
+
+  userForm.addEventListener("submit", (e) => {
+      console.log('SUBMISSION RECORDED');
+      console.log(searchInput.value)
+
     displayMatches(e);
+    e.preventDefault();
   });
 }
 
