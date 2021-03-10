@@ -1,3 +1,4 @@
+// This intializes the map
 function mapInit() {
   const map = L.map('mapid').setView([38.9897, -76.9378], 13);
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -12,26 +13,31 @@ function mapInit() {
   return map;
 }
 
-// Modified search and filter code from assignment 1 is here
-async function SearchFilter() {
- 
-  const request = await fetch('/api')
-  const restaurants = await request.json()
+// Function called search gets array of top five zipcode matches
+async function search(wordToMatch) {
+  const request = await fetch('/api');
+  const restaurants = await request.json();
 
-  function findMatches(wordToMatch, restaurants) {
+  function findMatches() {
     return restaurants.filter((place) => {
       const regex = new RegExp(wordToMatch, "gi");
       return (
-        place.zip.match(regex) 
+        place.zip.match(regex)
       );
     });
-  }
+  };
+  async function getTopFive() {
+    const matchArray = findMatches();
+    const firstFive = matchArray.slice(0, 5);
+    return firstFive;
+  };
+  return getTopFive();
+}
 
-  //this code shows the display that matches the user's input
-  function displayMatches(inputWord) {
-    const matchArray = findMatches(inputWord, restaurants);
-    const firstFive = matchArray.slice(0, 5)
-    const html = firstFive.map((place) => {
+// function called display takes the matches array from search and displays it
+async function display(matchesArray) {
+  function displayMatches() {
+    const html = matchesArray.map((place) => {
         return `<li>
         <span class="name"><b>${place.name}</b></span><br>
         <address><b>${place.address_line_1}</b><br>
@@ -42,32 +48,45 @@ async function SearchFilter() {
         <br>
       </li>`;
       }).join("");
+      suggestions.innerHTML = html;
 
-    suggestions.innerHTML = html;
+  }
+  const suggestions = document.querySelector(".ListOfLocations");
+  displayMatches()
+}
+
+
+// This calls the previous functions and builds the map with markers
+async function dataHandler(mapObjectFromFunction) {
+
+  function coordinateEntry {
+    // this should enter coordinates and place them as markers through a foor loop
+  }
+  function mapMoving{
+    // this should move the map to the coordinates stated on the map
   }
 
   const searchInput = document.querySelector(".SearchBar");
-  const suggestions = document.querySelector(".ListOfLocations");
   const userForm = document.querySelector(".userForm");
 
-
-
-  userForm.addEventListener("submit", (e) => {
-      console.log(`SUBMISSION RECORDED: ${searchInput.value}`);
-    displayMatches(searchInput.value);
+  userForm.addEventListener("submit", async (e) => {
+    console.log(`SUBMISSION RECORDED: ${searchInput.value}`);
     e.preventDefault();
+    let topFiveArray = await search(searchInput.value);
+    console.log(topFiveArray);
+    display(topFiveArray);
+    e.preventDefault();
+
   });
-}
 
 
 
-async function dataHandler(mapObjectFromFunction) {
-  SearchFilter()
-  var marker = L.marker([38.9897, -76.9378]).addTo(mapObjectFromFunction);
-  console.log(firstFive)
+  let marker = L.marker([38.9897, -76.9378]).addTo(mapObjectFromFunction); //example of what a marker should look like
   
 }
 
+
+// This runs all needed functions
 async function windowActions() {
   const map = mapInit();
   await dataHandler(map);
