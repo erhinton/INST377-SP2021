@@ -9,36 +9,35 @@ function mapInit() {
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoiZWhpbnRvbiIsImEiOiJja20yZ21rcGUxNHJyMm9yM3Q4dDE1dGFjIn0.-83mPUmqtwJV5j2Z8RftvQ'
   }).addTo(map);
-  console.log('map', map)
+  console.log('map', map);
   return map;
 }
 
-// Function called search gets array of top five zipcode matches
+// This function gets array of top five zipcode matches
 async function search(wordToMatch) {
   const request = await fetch('/api');
   const restaurants = await request.json();
 
   function findMatches() {
     return restaurants.filter((place) => {
-      const regex = new RegExp(wordToMatch, "gi");
+      const regex = new RegExp(wordToMatch, 'gi');
       return (
         place.zip.match(regex)
       );
     });
-  };
+  }
   async function getTopFive() {
     const matchArray = findMatches();
     const firstFive = matchArray.slice(0, 5);
     return firstFive;
-  };
+  }
   return getTopFive();
 }
 
-// function called display takes the matches array from search and displays it
+// This function takes the matches array from search and displays it
 async function display(matchesArray) {
   function displayMatches() {
-    const html = matchesArray.map((place) => {
-        return `<li>
+    const html = matchesArray.map((place) => `<li>
         <span class="name"><b>${place.name}</b></span><br>
         <address><b>${place.address_line_1}</b><br>
         <b>${place.city}</b><br>
@@ -46,45 +45,44 @@ async function display(matchesArray) {
         <b>${place.geocoded_column_1}</b><br>
         <b>${place.zip}</b><address>
         <br>
-      </li>`;
-      }).join("");
-      suggestions.innerHTML = html;
-
+      </li>`).join('');
+    suggestions.innerHTML = html;
   }
-  const suggestions = document.querySelector(".ListOfLocations");
-  displayMatches()
+  const suggestions = document.querySelector('.ListOfLocations');
+  displayMatches();
 }
-
 
 // This calls the previous functions and builds the map with markers
 async function dataHandler(mapObjectFromFunction) {
-
-  function coordinateEntry {
+  function coordinateEntry(arr) {
     // this should enter coordinates and place them as markers through a foor loop
-  }
-  function mapMoving{
-    // this should move the map to the coordinates stated on the map
+    // the i variable exists to only pan to the first marker placed
+    let i = 0;
+    for (const obj of arr) {
+      const coordinates = obj.geocoded_column_1.coordinates.reverse();
+      console.log(coordinates);
+
+      if (i < 1) {
+        mapObjectFromFunction.panTo(coordinates);
+      }
+
+      i += 1;
+      const marker = L.marker(coordinates).addTo(mapObjectFromFunction);
+    }
   }
 
-  const searchInput = document.querySelector(".SearchBar");
-  const userForm = document.querySelector(".userForm");
+  const searchInput = document.querySelector('.SearchBar');
+  const userForm = document.querySelector('.userForm');
 
-  userForm.addEventListener("submit", async (e) => {
+  userForm.addEventListener('submit', async (e) => {
     console.log(`SUBMISSION RECORDED: ${searchInput.value}`);
     e.preventDefault();
-    let topFiveArray = await search(searchInput.value);
+    const topFiveArray = await search(searchInput.value);
     console.log(topFiveArray);
     display(topFiveArray);
-    e.preventDefault();
-
+    coordinateEntry(topFiveArray);
   });
-
-
-
-  let marker = L.marker([38.9897, -76.9378]).addTo(mapObjectFromFunction); //example of what a marker should look like
-  
 }
-
 
 // This runs all needed functions
 async function windowActions() {
