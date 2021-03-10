@@ -37,18 +37,15 @@ async function search(wordToMatch) {
 // This function takes the matches array from search and displays it
 async function display(matchesArray) {
   function displayMatches() {
-    const html = matchesArray.map((place) => `<li>
+    const html = matchesArray.map((place) => `<li class="box">
         <span class="name"><b>${place.name}</b></span><br>
         <address><b>${place.address_line_1}</b><br>
-        <b>${place.city}</b><br>
-        <b>${place.state}</b><br>
-        <b>${place.geocoded_column_1}</b><br>
         <b>${place.zip}</b><address>
         <br>
       </li>`).join('');
     suggestions.innerHTML = html;
   }
-  const suggestions = document.querySelector('.ListOfLocations');
+  const suggestions = document.querySelector('.listOfLocations');
   displayMatches();
 }
 
@@ -76,7 +73,9 @@ async function dataHandler(mapObjectFromFunction) {
 
   userForm.addEventListener('submit', async (e) => {
     console.log(`SUBMISSION RECORDED: ${searchInput.value}`);
-    e.preventDefault();
+    if (searchInput.value !== ''){
+      e.preventDefault();
+    }
     const topFiveArray = await search(searchInput.value);
     console.log(topFiveArray);
     display(topFiveArray);

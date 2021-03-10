@@ -2,3 +2,13 @@
     height: 360px;
     width: 360px;
 }
+.mainContainer{
+    margin: 15px;
+}
+.control{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.header{
+    font-size:x-large;
+}
