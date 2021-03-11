@@ -73,13 +73,18 @@ async function dataHandler(mapObjectFromFunction) {
 
   userForm.addEventListener('submit', async (e) => {
     console.log(`SUBMISSION RECORDED: ${searchInput.value}`);
-    if (searchInput.value !== ''){
-      e.preventDefault();
-    }
+    e.preventDefault();
     const topFiveArray = await search(searchInput.value);
     console.log(topFiveArray);
     display(topFiveArray);
     coordinateEntry(topFiveArray);
+  });
+
+  // Erases all search results when keyup and empty box
+  userForm.addEventListener('keyup', (e) => {
+    if (searchInput.value === '') {
+      display([])
+    }
   });
 }
 
