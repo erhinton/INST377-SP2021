@@ -1,0 +1,128 @@
+body {
+    max-width: 650px auto;
+    line-height: 1.6;
+    font-size: 18px;
+    color: #444;
+    padding: 0 10px;
+
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+}
+
+#mapid { height: 480px; }
+
+.list-header {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.list-item {
+    border-radius: 4px;
+    color: rgba(25, 25, 25, 90);
+    background: #00d1b2;
+    padding: 5px;
+}
+
+
+
+html {
+    font-size: 11px;
+}
+
+.header {
+  color: rgb(33, 6, 77);
+  display: inline;
+  font-family: 'Autour One', cursive;
+  font-size: 30px;
+  text-align: center;
+
+
+}
+
+label {
+  font-size: 20px;
+}
+
+.MainContainer {
+    max-width: 960px;
+    min-height: 100%;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.SearchBar {
+    width: 300px;
+    height: 30px;
+    
+}
+
+.list {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+
+input {
+    width: 75%;
+    padding: 10px 10px;
+    margin: 10px 5px;
+    box-sizing: border-box;
+    background-color:rgb(220, 217, 245);
+  }
+
+  #SearchBar {
+    width: 500px;
+    height: 32px;
+    border-radius: 3px;
+    border: 1px solid black;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+#SearchContainer {
+  position: relative;
+}
+
+#SearchContainer ul{
+  width: 500px;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+}
+
+#SearchContainer li{
+  margin: 10px;
+  padding: 10px;
+  border-radius: 3px;
+  background: linear-gradient(to bottom, #693fdd 0%, #ec3535 100%);
+  display: block;
+}
+
+.ListOfRestaurants {
+  border-top: 1px solid red ;
+  margin-bottom: 100px;
+}
+
+  @media (min-width: 1000px){
+    h1 {
+      font-size: 5rem;
+    }
+    .first-half.page {
+      width: 48%;
+    }
+    .column:first-child, .columns:first-child {
+      margin-left: 0px;
+    }
+    
+  }
