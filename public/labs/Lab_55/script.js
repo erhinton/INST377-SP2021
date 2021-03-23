@@ -28,7 +28,7 @@ function mapScript() {
   
       event.preventDefault();
       console.log('submit fired', search.value);
-      const filtered= data.filter(record) => record.zip.includes(search.value);
+      const filtered= data.filter(record);
       const topFive= filtered.slice(0,5);
   
       if (topFive.length < 1) {
@@ -71,4 +71,4 @@ function mapScript() {
     await dataFilter(mapObject);
   }
   
-  window.onload= windowActions;
+  window.onload= windowActions()
